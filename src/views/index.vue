@@ -39,7 +39,7 @@ const state = reactive({
         sex: '男',
         age: 22
     },
-    url: require('@/assets/imgs/美女.jpg')
+    url: require('@/assets/imgs/preview.jpg')
 })
 </script>
 
