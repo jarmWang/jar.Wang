@@ -17,7 +17,8 @@ body {
     width: 100vw;
     /* 设置高度为视口高度 */
     height: 100vh;
-    background: url("@/assets/imgs/wallhaven-壁纸.webp");
+    // background: url("@/assets/imgs/白.jpg");
+    background: #000;
     z-index: -1;
-    background-size: cover;
+    // background-size: cover;
 }

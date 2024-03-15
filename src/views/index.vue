@@ -1,75 +1,54 @@
 <!--
  * @Author: wbq
  * @Date: 2024-03-14 15:19:45
- * @LastEditTime: 2024-03-14 18:07:17
+ * @LastEditTime: 2024-03-15 16:00:22
  * @LastEditors: wbq
- * @Description: 文件功能描述
+ * @Description: 文件功能描response
  * @FilePath: \BaiduSyncdisk\prod\jar.Wang\src\views\index.vue
 -->
 <template>
     <div class="hemony">
         <div class="my_container">
-            <el-image
-              class="my_img"
-              :src="state.url"
-              fit="cover"
-            />
             <div class="my_introduction">
-                <el-card class="my_card" shadow="always">
-                    <div class="my_info space">
-                        <span>姓名：{{ state.formData.name }}</span>
-                    </div>
-                    <div class="my_info space">
-                        <span>性别：{{ state.formData.sex }}</span>
-                    </div>
-                    <div class="my_info space">
-                        <span>年龄：{{ state.formData.age }}</span>
-                    </div>
-                </el-card>
+                <dateTime />
+                <content />
+            </div>
+            <div class="my_introduction">
+                <response />
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
-import { reactive } from 'vue'
+import { ref, onMounted, reactive, onBeforeUnmount } from 'vue'
+import dateTime from './dateTime.vue';
+import content from './content.vue';
+import response from './response.vue';
 const state = reactive({
     formData: {
         name: '王秉权',
         sex: '男',
         age: 22
     },
-    url: require('@/assets/imgs/preview.jpg')
+    url: ''
 })
 </script>
 
 <style lang="scss" scoped>
 .hemony {
     text-align: center;
-    .my_img {
-        margin-top: 10vh;
-        width: 300px;
-        height: 300px;
-        border-radius: 100%;
-        box-shadow: 0 0 10px #000;
-    }
-    .my_introduction {
-        display: grid;
-        justify-items: center;
-        color: #fff;
 
-        .my_card {
-            width: 480px;
-            margin-top: 10px;
-            border: none;
-        }
+    .my_container {
+        display: flex;
+        justify-content: space-between;
 
-        .my_info {
-            display: inline-block;
-        }
-
-        .space {
-            margin: 0 10px;
+        .my_introduction {
+            width: 100%;
+            display: flex;
+            color: #fff;
+            flex-direction: column;
+            align-items: center;
         }
     }
 }
