@@ -1,7 +1,7 @@
 <!--
  * @Author: wbq
  * @Date: 2024-03-14 15:19:45
- * @LastEditTime: 2024-03-15 15:56:56
+ * @LastEditTime: 2024-04-24 15:44:56
  * @LastEditors: wbq
  * @Description: 文件功能描
  * @FilePath: \BaiduSyncdisk\prod\jar.Wang\src\views\dateTime.vue
@@ -19,28 +19,28 @@
 </template>
 
 <script setup>
-import { ref, onMounted, reactive, onBeforeUnmount } from 'vue'
-import { date, dayWeek } from '@/utils/date'
-const time = ref('')
+import { ref, onMounted, reactive, onBeforeUnmount } from "vue";
+import { date, dayWeek } from "@/utils/date";
+const time = ref("");
 onMounted(() => {
     setInterval(() => {
-        time.value = new Date().toLocaleTimeString()
-  }, 1000)
-})
+        time.value = new Date().toLocaleTimeString();
+    }, 1000);
+});
 
 onBeforeUnmount(() => {
-    clearInterval()
-})
+    clearInterval();
+});
 </script>
 
 <style lang="scss" scoped>
 .date_time {
     margin-top: 10vh;
-    border: 1px solid #fff;
+    border: 1px solid #000;
     border-radius: 10px;
-    box-shadow: 0px 0px 10px #fff;
-    width: 400px;
-    height: 180px;
+    box-shadow: 0px 0px 10px #000;
+    width: 30%;
+    height: 12%;
     display: flex;
     flex-direction: column;
     align-items: center;
