@@ -1,0 +1,44 @@
+#books {
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+
+    ::v-deep .el-overlay {
+        position: absolute;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+    ::v-deep .el-overlay-dialog {
+        position: absolute;
+    }
+
+    ::v-deep .el-message {
+        position: absolute;
+    }
+
+    .center {
+        width: 100%;
+        padding: 0 3px;
+
+        .title {
+            width: 100%;
+            border-radius: 16px;
+            border: 1px solid #cacaca;
+            padding: 6px 0;
+            cursor: pointer;
+
+            &:hover {
+                color: #fff;
+                font-weight: 600;
+                background-color: #389cffde;
+            }
+        }
+    }
+
+    .main {
+        height: 88%;
+        padding: 10px;
+        overflow-y: auto;
+    }
+}

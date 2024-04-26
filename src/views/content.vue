@@ -1,11 +1,3 @@
-<!--
- * @Author: wbq
- * @Date: 2024-04-23 10:20:48
- * @LastEditTime: 2024-04-24 15:41:15
- * @LastEditors: wbq
- * @Description: 文件功能描述
- * @FilePath: \BaiduSyncdisk\prod\jar.Wang\src\views\content.vue
--->
 <template>
     <div class="main">
         <div class="container">
@@ -14,58 +6,69 @@
                     <DArrowLeft />
                 </el-icon>
                 <div ref="scrollTop" class="scrollTop">
-                    <div v-for="(item, index) in feature" :key="index" class="feature-btn" :class="[item.flag ? 'active' : '']" @click="flagTrue(item, index)">{{ item.name }}</div>
+                    <div v-for="(item, index) in uniqueFeature" :key="index" class="feature-btn" :class="{ active: activeIndex === index }" @click="toggleActive(index)">
+                        {{ item.name }}
+                    </div>
                 </div>
                 <el-icon :size="20" color="#409efc" @click="scorll('right')">
                     <DArrowRight />
                 </el-icon>
             </div>
             <div class="main-text">
-                <Books v-if="type('Books')" />
+                <Books v-if="isTypeActive('Books')" />
             </div>
         </div>
     </div>
 </template>
+  
+  <script setup>
+import { ref } from "vue";
 
-<script setup>
-import { ref, reactive } from "vue";
-const feature = ref([
-    { type: "Books", name: "书籍", flag: true },
-    { type: "2", name: "应用", flag: false },
-    { type: "3", name: "设置", flag: false },
-    { type: "4", name: "帮助", flag: false },
-    { type: "5", name: "关于", flag: false },
-    { type: "6", name: "首页", flag: false },
-    { type: "7", name: "应用", flag: false },
-    { type: "8", name: "关于", flag: false },
-    { type: "9", name: "首页", flag: false },
-    { type: "0", name: "应用", flag: false },
+// 功能数组
+const uniqueFeature = ref([
+    { type: "Books", name: "书籍" },
+    { type: "应用", name: "应用" },
+    { type: "设置", name: "设置" },
+    { type: "帮助", name: "帮助" },
+    { type: "关于", name: "关于" },
+    { type: "首页", name: "首页" },
 ]);
-// 按钮状态
-const flagTrue = (item, index) => {
-    feature.value.forEach((i) => {
-        i.flag = item.type === i.type;
-    });
+
+// 选中的按钮
+const activeIndex = ref(0);
+
+// Toggle active button
+const toggleActive = (index) => {
+    activeIndex.value = index;
 };
 
-// 显示组件控制
-const type = (type) => {
-    return feature.value.find((item) => item.flag).type === type;
+// Check if a specific type is active
+const isTypeActive = (type) => {
+    return uniqueFeature.value[activeIndex.value].type === type;
 };
 
-// 功能左右滚动
+// 左右滚动
 const scrollTop = ref(null);
+const transWidth = -300; // 设定滚动距离
 const scorll = (direction) => {
     const scrollEl = scrollTop.value;
-    const transWidth = direction === "left" ? -300 : 300;
+
+    const maxScrollLeft = Math.max(
+        0,
+        scrollEl.scrollWidth - scrollEl.clientWidth
+    );
+    const newScrollLeft =
+        direction === "left"
+            ? Math.min(scrollEl.scrollLeft + transWidth, maxScrollLeft)
+            : Math.max(scrollEl.scrollLeft + transWidth, 0);
 
     scrollEl.scrollTo({
-        left: scrollEl.scrollLeft + transWidth,
+        left: newScrollLeft,
         behavior: "smooth",
     });
 };
 </script>
-
+  
 <style lang="scss" scoped>
 .main {
     margin-top: 20px;
