@@ -2,20 +2,22 @@
     <div class="main">
         <div class="container">
             <div class="main-list">
-                <el-icon :size="20" color="#409efc" @click="scorll('left')">
+                <el-icon :size="20" style="cursor: pointer;" color="#409efc" @click="scorll('left')">
                     <DArrowLeft />
                 </el-icon>
                 <div ref="scrollTop" class="scrollTop">
-                    <div v-for="(item, index) in uniqueFeature" :key="index" class="feature-btn" :class="{ active: activeIndex === index }" @click="toggleActive(index)">
-                        {{ item.name }}
+                    <div class="scrollOver">
+                        <div v-for="(item, index) in uniqueFeature" :key="index" class="feature-btn" :class="{ active: activeIndex === index }" @click="toggleActive(index)">
+                            {{ item.name }}
+                        </div>
                     </div>
                 </div>
-                <el-icon :size="20" color="#409efc" @click="scorll('right')">
+                <el-icon :size="20" style="cursor: pointer;" color="#409efc" @click="scorll('right')">
                     <DArrowRight />
                 </el-icon>
             </div>
             <div class="main-text">
-                <Books v-if="isTypeActive('Books')" />
+                <Books v-show="isTypeActive('Books')" />
             </div>
         </div>
     </div>
@@ -31,6 +33,10 @@ const uniqueFeature = ref([
     { type: "设置", name: "设置" },
     { type: "帮助", name: "帮助" },
     { type: "关于", name: "关于" },
+    { type: "首页", name: "首页" },
+    { type: "首页", name: "首页" },
+    { type: "首页", name: "首页" },
+    { type: "首页", name: "首页" },
     { type: "首页", name: "首页" },
 ]);
 
@@ -49,23 +55,15 @@ const isTypeActive = (type) => {
 
 // 左右滚动
 const scrollTop = ref(null);
-const transWidth = -300; // 设定滚动距离
 const scorll = (direction) => {
     const scrollEl = scrollTop.value;
-
-    const maxScrollLeft = Math.max(
-        0,
-        scrollEl.scrollWidth - scrollEl.clientWidth
-    );
-    const newScrollLeft =
-        direction === "left"
-            ? Math.min(scrollEl.scrollLeft + transWidth, maxScrollLeft)
-            : Math.max(scrollEl.scrollLeft + transWidth, 0);
+    const transWidth = direction === "left" ? -300 : 300;
 
     scrollEl.scrollTo({
-        left: newScrollLeft,
+        left: scrollEl.scrollLeft + transWidth,
         behavior: "smooth",
     });
+    console.log(scrollEl, transWidth);
 };
 </script>
   
@@ -81,23 +79,27 @@ const scorll = (direction) => {
     .container {
         width: 100%;
         height: 100%;
+        display: flex;
+        flex-direction: column;
+
         .main-list {
-            padding: 0 10px;
+            padding: 5px 10px;
             border-top-left-radius: 10px;
             border-top-right-radius: 10px;
             border-bottom: 1px solid #000;
-            height: 6%;
             display: flex;
             align-items: center;
             .scrollTop {
                 padding: 0 10px;
                 overflow-x: scroll;
-                white-space: nowrap;
-                display: -webkit-inline-box;
-                width: 100%;
 
                 &::-webkit-scrollbar {
                     display: none;
+                }
+
+                .scrollOver {
+                    display: -webkit-inline-box;
+                    white-space: nowrap;
                 }
 
                 .feature-btn {
@@ -121,7 +123,7 @@ const scorll = (direction) => {
         }
 
         .main-text {
-            height: 94%;
+            overflow: hidden;
         }
     }
 }

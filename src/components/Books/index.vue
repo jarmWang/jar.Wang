@@ -24,14 +24,13 @@
                     <Operation />
                 </el-icon>
             </template>
-            <template>
-                <div>
-                    {{ chapter }}
-                </div>
-            </template>
+            <div v-if="chapter" style="margin-bottom: 5px;font-size: 12px;color: rgb(100, 100, 100);">
+                {{ chapter }}
+            </div>
         </Headers>
         <div class="main">
             <div v-html="bookHtml.text"></div>
+            <el-empty v-if="!bookHtml.text" :image="image" description=" " />
         </div>
         <Dialog ref="dialogOpen" @callback="callback"></Dialog>
         <Drawer ref="drawerOpen" @callback="callback"></Drawer>
@@ -51,6 +50,7 @@ const booksData = ref({}); // 书籍数据
 const drawerOpen = ref(null); // 抽屉ref
 const dialogOpen = ref(null); // 弹窗ref
 const isLoading = ref(false); // 加载loading
+const image = require('@/assets/status/none.png')
 let searchError = null;
 onMounted(() => {});
 

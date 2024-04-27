@@ -2,6 +2,8 @@
     height: 100%;
     position: relative;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
 
     ::v-deep .el-overlay {
         position: absolute;
@@ -37,8 +39,7 @@
     }
 
     .main {
-        height: 88%;
-        padding: 10px;
+        margin: 10px 1px 10px 10px;
         overflow-y: auto;
     }
 }

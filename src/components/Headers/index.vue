@@ -11,8 +11,8 @@
                 <slot name="right"></slot>
             </div>
         </div>
-        <div class="bottom">
-            <slot></slot>
+        <div>
+            <slot name="default"></slot>
         </div>
     </div>
 </template>
@@ -30,30 +30,34 @@
         justify-content: space-between;
         background-color: var(--header-bg-color, none);
         padding: 10px;
+
+        .left,
+        .center,
+        .right {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-basis: 0;
+            flex-grow: 1;
+            min-width: 0;
+            overflow: hidden;
+        }
+
+        .left {
+            justify-content: flex-start;
+        }
+
+        .center {
+            justify-content: center;
+        }
+
+        .right {
+            justify-content: flex-end;
+        }
     }
 
-    .left,
-    .center,
-    .right {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        flex-basis: 0;
-        flex-grow: 1;
-        min-width: 0;
-        overflow: hidden;
-    }
-
-    .left {
-        justify-content: flex-start;
-    }
-
-    .center {
-        justify-content: center;
-    }
-
-    .right {
-        justify-content: flex-end;
+    .bottom {
+        margin-bottom: 5px;
     }
 }
 </style>

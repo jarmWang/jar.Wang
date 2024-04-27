@@ -14,7 +14,7 @@
                     <template #append>
                         <el-button icon="search" @click="searchClick" />
                     </template>
-                </el-input>
+                </el-input> 
             </div>
             <div class="main-list" id="main-list-loading">
                 <div v-for="(item, index) in booksData" :key="index" class="main-list-item" @click="itemClick(item)">
@@ -27,17 +27,18 @@
                     </div>
                     <div class="main-list-item-desc">{{ item.desc }}</div>
                 </div>
+                <el-empty v-if="!(booksData.length > 0)" :image="image" description=" " />
             </div>
         </el-dialog>
 
-        <el-dialog v-model="dialogOpenBooksList" title="选择书源" top="8vh" width="30%" draggable :show-close="false">
+        <el-dialog v-model="dialogOpenBooksList" title="选择书源" top="5vh" width="50%" :show-close="false">
             <div class="booksList">
                 <div v-for="(item, index) in bookslist" :key="index" class="booksList-item" @click="booksClick(item)">
                     <div>{{ item.name }}</div>
                     <div>{{ item.new }}</div>
                 </div>
+                <el-empty v-if="!(bookslist.length > 0)" :image="image" description=" " />
             </div>
-
         </el-dialog>
     </div>
 </template>
@@ -45,11 +46,13 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { searchList } from "../api/api.js";
+import { ElMessage } from "element-plus";
 const booksData = ref({}); // 数据
 const dialogOpen = ref(false); // 弹窗开关
 const dialogOpenBooksList = ref(false); // 选择书源开关
 const bookslist = ref([]); // 书源列表
 const searchKeyword = ref("武动乾坤"); // 搜索关键字
+const image = require('@/assets/status/none.png')
 // 开启
 const open = () => {
     dialogOpen.value = true;
@@ -164,8 +167,9 @@ defineExpose({ open });
     }
 
     .booksList {
-        height: 15vh;
+        height: 30vh;
         overflow-y: auto;
+        margin-top: 10px;
         padding: 0 5px;
 
         .booksList-item {
