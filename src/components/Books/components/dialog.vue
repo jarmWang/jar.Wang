@@ -14,7 +14,7 @@
                     <template #append>
                         <el-button icon="search" @click="searchClick" />
                     </template>
-                </el-input> 
+                </el-input>
             </div>
             <div class="main-list" id="main-list-loading">
                 <div v-for="(item, index) in booksData" :key="index" class="main-list-item" @click="itemClick(item)">
@@ -27,7 +27,7 @@
                     </div>
                     <div class="main-list-item-desc">{{ item.desc }}</div>
                 </div>
-                <el-empty v-if="!(booksData.length > 0)" :image="image" description=" " />
+                <el-empty v-if="!(booksData.length > 0)" :image="image" description="啥也没有哦~" />
             </div>
         </el-dialog>
 
@@ -37,7 +37,7 @@
                     <div>{{ item.name }}</div>
                     <div>{{ item.new }}</div>
                 </div>
-                <el-empty v-if="!(bookslist.length > 0)" :image="image" description=" " />
+                <el-empty v-if="!(bookslist.length > 0)" :image="image" description="啥也没有哦~" />
             </div>
         </el-dialog>
     </div>
@@ -52,7 +52,7 @@ const dialogOpen = ref(false); // 弹窗开关
 const dialogOpenBooksList = ref(false); // 选择书源开关
 const bookslist = ref([]); // 书源列表
 const searchKeyword = ref("武动乾坤"); // 搜索关键字
-const image = require('@/assets/status/none.png')
+const image = require("@/assets/status/none.png");
 // 开启
 const open = () => {
     dialogOpen.value = true;

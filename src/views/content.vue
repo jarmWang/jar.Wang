@@ -123,6 +123,7 @@ const scorll = (direction) => {
         }
 
         .main-text {
+            flex: 1;
             overflow: hidden;
         }
     }

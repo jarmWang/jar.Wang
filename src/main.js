@@ -21,6 +21,10 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     app.component(key, component)
 }
 
+// icon
+import '@/assets/iconfont/iconfont.css';
+import '@/assets/iconfont/iconfont.js';
+
 // 全局组件注册
 import components from '@/components/index.js'
 app.use(components)

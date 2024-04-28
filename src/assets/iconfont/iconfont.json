@@ -1,0 +1,44 @@
+{
+  "id": "3444963",
+  "name": "vue",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "5387843",
+      "name": "主题_调色盘_o",
+      "font_class": "zhuti_tiaosepan_o",
+      "unicode": "eb6e",
+      "unicode_decimal": 60270
+    },
+    {
+      "icon_id": "1716891",
+      "name": "背景色",
+      "font_class": "beijingse",
+      "unicode": "e6ff",
+      "unicode_decimal": 59135
+    },
+    {
+      "icon_id": "8671564",
+      "name": "背景",
+      "font_class": "beijing",
+      "unicode": "e6e0",
+      "unicode_decimal": 59104
+    },
+    {
+      "icon_id": "2076262",
+      "name": "目录",
+      "font_class": "mulu",
+      "unicode": "e890",
+      "unicode_decimal": 59536
+    },
+    {
+      "icon_id": "10064728",
+      "name": "文字",
+      "font_class": "wenzi",
+      "unicode": "e633",
+      "unicode_decimal": 58931
+    }
+  ]
+}
