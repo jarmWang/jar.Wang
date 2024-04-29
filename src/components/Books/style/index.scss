@@ -32,6 +32,11 @@
         }
     }
 
+    .hover-icon:hover {
+        color: #389cff;
+        cursor: pointer;
+    }
+
     .center {
         width: 100%;
         padding: 0 3px;
@@ -54,6 +59,11 @@
     .main {
         margin: 10px 1px 10px 10px;
         overflow-y: auto;
+
+        div {
+            padding: 10px;
+            text-align: left;
+        }
     }
 
     .lock {

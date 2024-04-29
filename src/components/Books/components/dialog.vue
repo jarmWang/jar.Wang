@@ -1,14 +1,14 @@
 <!--
  * @Author: wbq
  * @Date: 2024-04-26 13:49:55
- * @LastEditTime: 2024-04-26 17:37:29
+ * @LastEditTime: 2024-04-29 15:05:48
  * @LastEditors: wbq
  * @Description: 文件功能描述
  * @FilePath: \BaiduSyncdisk\prod\jar.Wang\src\components\Books\components\dialog.vue
 -->
 <template>
     <div class="dialog">
-        <el-dialog v-model="dialogOpen" title="搜索" top="5vh" width="50%" draggable :show-close="false">
+        <el-dialog v-model="dialogOpen" title="搜索" top="5vh" width="50%" draggable :show-close="false" :style="props.styleSwitching">
             <div class="search-input">
                 <el-input v-model="searchKeyword" placeholder="请输入完整书名，例如 《武动乾坤》" class="input-with-select">
                     <template #append>
@@ -31,7 +31,7 @@
             </div>
         </el-dialog>
 
-        <el-dialog v-model="dialogOpenBooksList" title="选择书源" top="5vh" width="50%" :show-close="false">
+        <el-dialog v-model="dialogOpenBooksList" title="选择书源" top="5vh" width="50%" :show-close="false" :style="props.styleSwitching">
             <div class="booksList">
                 <div v-for="(item, index) in bookslist" :key="index" class="booksList-item" @click="booksClick(item)">
                     <div>{{ item.name }}</div>
@@ -47,6 +47,7 @@
 import { ref, onMounted } from "vue";
 import { searchList } from "../api/api.js";
 import { ElMessage } from "element-plus";
+const props = defineProps(["styleSwitching"]);
 const booksData = ref({}); // 数据
 const dialogOpen = ref(false); // 弹窗开关
 const dialogOpenBooksList = ref(false); // 选择书源开关
@@ -56,6 +57,7 @@ const image = require("@/assets/status/none.png");
 // 开启
 const open = () => {
     dialogOpen.value = true;
+    console.log(props.styleSwitching);
 };
 
 // 书名搜索
@@ -160,7 +162,6 @@ defineExpose({ open });
             }
 
             &:hover {
-                border-bottom: 1px solid #fff;
                 box-shadow: 0px 5px 8px 0px rgba(11, 36, 85, 0.13);
             }
         }
@@ -197,7 +198,6 @@ defineExpose({ open });
 
             &:hover {
                 border-radius: 5px;
-                border-bottom: 1px solid #fff;
                 box-shadow: 0px 5px 8px 0px rgba(11, 36, 85, 0.13);
             }
         }

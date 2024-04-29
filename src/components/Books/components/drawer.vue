@@ -1,6 +1,14 @@
+<!--
+ * @Author: wbq
+ * @Date: 2024-04-26 10:57:30
+ * @LastEditTime: 2024-04-29 14:58:59
+ * @LastEditors: wbq
+ * @Description: 文件功能描述
+ * @FilePath: \BaiduSyncdisk\prod\jar.Wang\src\components\Books\components\drawer.vue
+-->
 <template>
     <div class="drawer">
-        <el-drawer v-model="drawerOpen" :direction="'rtl'" size="30%" :before-close="() => drawerOpen = false" :show-close="false">
+        <el-drawer v-model="drawerOpen" :direction="'rtl'" size="30%" :before-close="() => drawerOpen = false" :show-close="false" :style="props.styleSwitching">
             <template #header>
                 <div>
                     {{ booksData.name }}
@@ -18,6 +26,7 @@
 import { ref, onMounted } from "vue";
 const booksData = ref({}); // 数据
 const drawerOpen = ref(false); // 抽屉开关
+const props = defineProps(["styleSwitching"]); // 主题切换
 // 开启
 const open = (data) => {
     booksData.value = data;
