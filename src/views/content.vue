@@ -18,6 +18,7 @@
             </div>
             <div class="main-text">
                 <Books v-show="isTypeActive('Books')" />
+                <Poetry v-show="isTypeActive('Poetry')" />
             </div>
         </div>
     </div>
@@ -28,8 +29,8 @@ import { ref } from "vue";
 
 // 功能数组
 const uniqueFeature = ref([
+    { type: "Poetry", name: "诗词" },
     { type: "Books", name: "书籍" },
-    { type: "应用", name: "应用" },
     { type: "设置", name: "设置" },
     { type: "帮助", name: "帮助" },
     { type: "关于", name: "关于" },

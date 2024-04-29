@@ -77,7 +77,7 @@
 
 <script setup>
 import { booksDetails } from "./api/api";
-import { ref, onMounted, computed } from "vue";
+import { ref, computed } from "vue";
 import { ElMessage } from "element-plus";
 import Drawer from "./components/drawer.vue";
 import Dialog from "./components/dialog.vue";
@@ -120,8 +120,6 @@ const bodySetting = ref({
         "font-family": "KaiTi",
     },
 });
-let searchError = null;
-onMounted(() => {});
 
 const bData = async (url, obj) => {
     const results = await booksDetails(url, { target: "#books" });
