@@ -8,12 +8,12 @@
 -->
 <template>
     <div id="full-screen-icon">
-        <span :class="flodIconClass" @click="isFullScreen"></span>
+        <span :class="[full ? 'iconfont icon-tuichuquanping' : 'iconfont icon-pingmuquanping']" @click="isFullScreen"></span>
     </div>
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
+import { ref, onMounted } from "vue";
 import { ElMessage } from "element-plus";
 const props = defineProps(["dom"]);
 const full = ref(false);
@@ -23,7 +23,7 @@ const isFullScreen = () => {
     if (document.fullscreenEnabled) {
         const element = document.getElementById(props.dom);
         // 判断当前元素是否全屏
-        if (!isElementFullScreen()) {
+        if (full.value) {
             // 退出全屏
             document.exitFullscreen();
             full.value = false;
@@ -40,23 +40,26 @@ const isFullScreen = () => {
     }
 };
 
-/**
- * @description: 检测有没有元素处于全屏状态
- * @return 布尔值
- */
-const isElementFullScreen = () => {
-    const fullscreenElement =
+onMounted(() => {
+    window.onresize = () => {
+        if (!checkFull()) {
+            // 退出全屏后要执行的动作
+            full.value = false;
+        }
+    };
+});
+
+// 判断浏览器是否有全屏显示
+const checkFull = () => {
+    var isFull =
         document.fullscreenElement ||
-        document.msFullscreenElement ||
         document.mozFullScreenElement ||
         document.webkitFullscreenElement;
-    return fullscreenElement === null;
+    if (isFull === undefined) {
+        isFull = false;
+    }
+    return isFull;
 };
-
-const flodIconClass = watch(isElementFullScreen, (n, o) => {
-    console.log(n, o);
-    return n ? "iconfont icon-tuichuquanping" : "iconfont icon-pingmuquanping";
-});
 </script>
 
 <style scoped>

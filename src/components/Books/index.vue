@@ -205,7 +205,7 @@ const setBody = (value) => {
 
 // 切换字体大小
 const fontSize = (value) => {
-    value === '-' ? titleSize.value-- : titleSize.value++;
+    value === "-" ? titleSize.value-- : titleSize.value++;
     titleSize.value =
         titleSize.value < 10 ? 10 : titleSize.value > 30 ? 30 : titleSize.value;
 };
@@ -322,6 +322,8 @@ const fontSize = (value) => {
                     flex-grow: 1;
                     cursor: pointer;
                     background: #eeeeee;
+                    border-top-left-radius: 10px;
+                    border-bottom-left-radius: 10px;
                 }
                 &:nth-child(2) {
                     color: #505050;
@@ -331,6 +333,8 @@ const fontSize = (value) => {
                     flex-grow: 1;
                     cursor: pointer;
                     background: #eeeeee;
+                    border-top-right-radius: 10px;
+                    border-bottom-right-radius: 10px;
                 }
             }
         }
