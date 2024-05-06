@@ -1,7 +1,7 @@
 <!--
  * @Author: wbq
  * @Date: 2024-04-24 14:09:34
- * @LastEditTime: 2024-04-29 16:56:22
+ * @LastEditTime: 2024-05-06 14:14:32
  * @LastEditors: wbq
  * @Description: 文件功能描述
  * @FilePath: \BaiduSyncdisk\prod\jar.Wang\src\components\Books\index.vue
@@ -153,7 +153,6 @@ const drawerOpenList = () => {
 
 // 选择章节回调
 const callback = (item) => {
-    console.log(item);
     const { type, data } = item;
     switch (type) {
         case "dialog":

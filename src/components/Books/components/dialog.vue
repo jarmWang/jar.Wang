@@ -57,7 +57,6 @@ const image = require("@/assets/status/none.png");
 // 开启
 const open = () => {
     dialogOpen.value = true;
-    console.log(props.styleSwitching);
 };
 
 // 书名搜索

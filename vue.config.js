@@ -1,7 +1,7 @@
 /*
  * @Author: wbq
  * @Date: 2024-03-12 15:19:45
- * @LastEditTime: 2024-04-26 15:50:27
+ * @LastEditTime: 2024-05-06 15:33:30
  * @LastEditors: wbq
  * @Description: 文件功能描述
  * @FilePath: \BaiduSyncdisk\prod\jar.Wang\vue.config.js
@@ -11,13 +11,20 @@ module.exports = defineConfig({
     publicPath: './',
     devServer: {
         port: 8888,
-        open: true,
+        open: false,
         proxy: {
             '/bbdaxia': {
                 target: 'https://api.book.bbdaxia.com',
                 changeOrigin: true,
                 pathRewrite: {
                     '^/bbdaxia': '/'
+                }
+            },
+            '/poetry': {
+                target: 'https://api.sou-yun.cn/open/poem',
+                changeOrigin: true,
+                pathRewrite: {
+                    '^/poetry': '/'
                 }
             }
         }

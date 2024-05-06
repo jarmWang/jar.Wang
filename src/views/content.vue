@@ -19,6 +19,7 @@
             <div class="main-text">
                 <Books v-show="isTypeActive('Books')" />
                 <Poetry v-show="isTypeActive('Poetry')" />
+                <Music v-show="isTypeActive('Music')" />
                 <MessageBoard v-show="isTypeActive('MessageBoard')"></MessageBoard>
             </div>
         </div>
@@ -31,9 +32,9 @@ import { ref } from "vue";
 // 功能数组
 const uniqueFeature = ref([
     { type: "Poetry", name: "诗词" },
+    { type: "Music", name: "音乐" },
     { type: "Books", name: "书籍" },
     { type: "MessageBoard", name: "留言板" },
-    { type: "帮助", name: "帮助" },
     { type: "关于", name: "关于" },
     { type: "首页", name: "首页" },
     { type: "首页", name: "首页" },
