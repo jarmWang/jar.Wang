@@ -1,14 +1,14 @@
 <!--
  * @Author: wbq
  * @Date: 2024-04-24 14:09:34
- * @LastEditTime: 2024-05-06 14:14:32
+ * @LastEditTime: 2024-05-07 13:38:21
  * @LastEditors: wbq
  * @Description: 文件功能描述
  * @FilePath: \BaiduSyncdisk\prod\jar.Wang\src\components\Books\index.vue
 -->
 <template>
     <div id="books" :style="switching">
-        <Headers>
+        <Headers :show="!!bookHtml.text" :left-title="isTxt('up')" :right-title="isTxt('next')" :chapter="chapter" :is-disabled="isTrue(bookHtml.up)" @toggle="toggle">
             <template #left>
                 <div class="books-txt">
                     <el-popover placement="bottom-start" width="300px" :popper-style="switching" popper-class="popover-books" title="设置" trigger="hover">
@@ -56,15 +56,6 @@
                 <FullScreenIcon :dom="'books'" class="hover-icon"></FullScreenIcon>
                 <span class="iconfont icon-mulu hover-icon" @click="drawerOpenList"></span>
             </template>
-            <div v-if="bookHtml.text" class="lock">
-                <div class="lock-left" :disabled="isTrue(bookHtml.up)" @click="toggle('up')">
-                    {{ isTrue(bookHtml.up) ? "上一章" : "没有喽~" }}
-                </div>
-                <div class="lock-center" v-if="chapter">{{ chapter }}</div>
-                <div class="lock-right" :disabled="isTrue(bookHtml.next)" @click="toggle('next')">
-                    {{ isTrue(bookHtml.next) ? "下一章" : "没有喽~" }}
-                </div>
-            </div>
         </Headers>
         <div class="main">
             <div v-html="bookHtml.text" :style="[bodySetting[titleBody], {'font-size': titleSize + 'px'}]"></div>
@@ -168,7 +159,17 @@ const callback = (item) => {
 };
 
 const isTrue = (value) => {
-    return value.endsWith(".html");
+    return value && value.endsWith(".html");
+};
+
+const isTxt = (value) => {
+    if (value === "up" && isTrue(bookHtml.value.up)) {
+        return "上一章";
+    } else if (value === "next" && isTrue(bookHtml.value.next)) {
+        return "下一章";
+    } else {
+        return "没有喽~";
+    }
 };
 
 // 切换章节

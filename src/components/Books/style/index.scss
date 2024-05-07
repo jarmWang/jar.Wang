@@ -67,23 +67,4 @@
             text-align: left;
         }
     }
-
-    .lock {
-        bottom: 8px;
-        font-size: 12px;
-        color: rgb(100, 100, 100);
-        margin-bottom: 5px;
-        display: flex;
-        justify-content: space-between;
-        padding: 0 10px;
-
-        .lock-left,
-        .lock-right {
-            cursor: pointer;
-
-            &:hover {
-                color: #389cff;
-            }
-        }
-    }
 }

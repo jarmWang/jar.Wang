@@ -11,13 +11,42 @@
                 <slot name="right"></slot>
             </div>
         </div>
-        <div>
-            <slot name="default"></slot>
+        <div v-show="props.show">
+            <div class="lock">
+                <div class="lock-left" :disabled="props.isDisabled" @click="toggle('up')">
+                    {{ props.leftTitle }}
+                </div>
+                <div class="lock-center" v-if="props.chapter">{{ props.chapter }}</div>
+                <div class="lock-right" :disabled="props.isDisabled" @click="toggle('next')">
+                    {{ props.rightTitle }}
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
 <script setup>
+const props = defineProps({
+    show: {
+        type: Boolean,
+        default: false,
+    },
+    leftTitle: {
+        type: String,
+        default: "上一章",
+    },
+    rightTitle: {
+        type: String,
+        default: "下一章",
+    },
+    chapter: String,
+    isDisabled: {
+        type: Boolean,
+        default: false,
+    },
+});
+const emit = defineEmits(["toggle"]);
+const toggle = (type) => emit("toggle", type);
 </script>
 
 <style lang="scss" scoped>
@@ -58,6 +87,25 @@
 
     .bottom {
         margin-bottom: 5px;
+    }
+
+    .lock {
+        bottom: 8px;
+        font-size: 12px;
+        color: rgb(100, 100, 100);
+        margin-bottom: 5px;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 10px;
+
+        .lock-left,
+        .lock-right {
+            cursor: pointer;
+
+            &:hover {
+                color: #389cff;
+            }
+        }
     }
 }
 </style>
