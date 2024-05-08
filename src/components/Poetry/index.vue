@@ -1,7 +1,7 @@
 <!--
  * @Author: wbq
  * @Date: 2024-04-30 09:52:06
- * @LastEditTime: 2024-05-08 14:23:30
+ * @LastEditTime: 2024-05-08 15:11:24
  * @LastEditors: wbq
  * @Description: 文件功能描述
  * @FilePath: \BaiduSyncdisk\prod\jar.Wang\src\components\Poetry\index.vue
@@ -18,7 +18,7 @@
             </template>
         </Headers>
         <div class="main">
-            <div class="scroll">
+            <div class="scroll" v-if="poetryData.length > 0">
                 <div v-for="(item, index) in poetryData" :key="index" class="card">
                     <div class="poem" :class="'index' + index">
                         <div class="title">《{{ item.Title.Content }}》</div>
@@ -35,6 +35,7 @@
                     </div>
                 </div>
             </div>
+            <el-empty v-else :image="image" description="啥也没有哦~" />
         </div>
     </div>
 </template>
@@ -44,6 +45,7 @@ import { ref, onMounted } from "vue";
 import { poetrySearch } from "./api/index";
 const poetryData = ref([]);
 const isTrue = ref(false);
+const image = require("@/assets/status/none.png");
 const searchItem = ref({
     key: "将进酒",
     pageNo: 0,
@@ -58,18 +60,24 @@ onMounted(() => {
 const searchClick = (v = false) => {
     v && (searchItem.value.pageNo = 0);
     poetrySearch(searchItem.value, { target: "#poetry" }).then((res) => {
-        poetryData.value =
-            res.data.ShiData?.map((i) => {
-                return {
-                    ...i,
-                    flag: false,
-                };
-            }) || [];
-        searchItem.value.pageNo = res.data.PageNo;
-        isTrue.value =
-            (res.data.PageNo == 0
-                ? res.data.PageSize
-                : res.data.PageNo * res.data.PageSize) > res.data.Count;
+        if (res && res.data) {
+            poetryData.value =
+                res.data.ShiData?.map((i) => {
+                    return {
+                        ...i,
+                        flag: false,
+                    };
+                }) || [];
+            searchItem.value.pageNo = res.data.PageNo;
+            isTrue.value =
+                (res.data.PageNo == 0
+                    ? res.data.PageSize
+                    : res.data.PageNo * res.data.PageSize) > res.data.Count;
+        } else {
+            poetryData.value = [];
+            searchItem.value.pageNo = 0;
+            isTrue.value = false;
+        }
     });
 };
 
