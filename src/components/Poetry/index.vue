@@ -1,18 +1,18 @@
 <!--
  * @Author: wbq
  * @Date: 2024-04-30 09:52:06
- * @LastEditTime: 2024-05-07 17:44:11
+ * @LastEditTime: 2024-05-08 14:23:30
  * @LastEditors: wbq
  * @Description: 文件功能描述
  * @FilePath: \BaiduSyncdisk\prod\jar.Wang\src\components\Poetry\index.vue
 -->
 <template>
     <div id="poetry" class="poetry">
-        <Headers>
+        <Headers :show="poetryData.length > 0" :left-title="isTitle('up')" :right-title="isTitle('next')" @toggle="toggle">
             <template #center>
-                <el-input v-model="searchItem.key" placeholder="请输入作者或者诗句">
+                <el-input v-model="searchItem.key" placeholder="请输入关键字">
                     <template #append>
-                        <el-button icon="search" @click="searchClick" />
+                        <el-button icon="search" @click="searchClick(true)" />
                     </template>
                 </el-input>
             </template>
@@ -27,12 +27,10 @@
                             <span>{{ item.Author }}</span>
                         </div>
                         <div class="content">
-                            <div v-for="(row, index) in displayData(item.Clauses)" :key="index">
-                                {{ row.Content }}
-                            </div>
+                            <div v-html="displayData(item.Clauses)" />
                         </div>
                     </div>
-                    <div class="isShow" @click="isShow(item, index)">
+                    <div class="isShow" v-show="displayData(item.Clauses).length > 2" @click="isShow(item, index)">
                         {{ item.flag ? "收起" : "展开全文" }}
                     </div>
                 </div>
@@ -57,7 +55,8 @@ onMounted(() => {
 });
 
 // 查询
-const searchClick = () => {
+const searchClick = (v = false) => {
+    v && (searchItem.value.pageNo = 0);
     poetrySearch(searchItem.value, { target: "#poetry" }).then((res) => {
         poetryData.value =
             res.data.ShiData?.map((i) => {
@@ -67,21 +66,55 @@ const searchClick = () => {
                 };
             }) || [];
         searchItem.value.pageNo = res.data.PageNo;
-        isTrue.value = res.data.PageNo * res.data.PageSize > res.data.Count;
+        isTrue.value =
+            (res.data.PageNo == 0
+                ? res.data.PageSize
+                : res.data.PageNo * res.data.PageSize) > res.data.Count;
     });
 };
 
 // 展开显示
 const isShow = (item, index) => {
     const dom = document.querySelector(".index" + index);
-    dom.style.height = item.flag ? "80px" : dom.scrollHeight + "px";
+    dom.style.height = item.flag ? "95px" : dom.scrollHeight + "px";
     item.flag = !item.flag;
 };
 
 // 处理数组
 const displayData = (data) => {
-    console.log(data);
-    return data;
+    let txt = "";
+    data.forEach((i) => {
+        txt += `<span>${i.Content}</span>${
+            i.Content.endsWith("。") ? "<br>" : ""
+        }`;
+    });
+    return txt;
+};
+
+// 分页
+const isTitle = (type) => {
+    if (type === "up") {
+        return searchItem.value.pageNo > 0 ? "上一页" : "";
+    } else if (type === "next") {
+        return isTrue.value ? "" : "下一页";
+    }
+};
+
+// 切换页码
+const toggle = (type) => {
+    if (type === "up") {
+        if (searchItem.value.pageNo <= 0) {
+            searchItem.value.pageNo = 0;
+            return;
+        }
+        searchItem.value.pageNo--;
+    } else if (type === "next") {
+        if (isTrue.value) {
+            return;
+        }
+        searchItem.value.pageNo++;
+    }
+    searchClick();
 };
 </script>
 
@@ -112,9 +145,8 @@ const displayData = (data) => {
                 box-shadow: 0px 2px 5px 0px rgba(11, 36, 85, 0.13);
 
                 .poem {
-                    // transform: ;
                     transition: all 0.3s;
-                    height: 80px;
+                    height: 95px;
                     overflow: hidden;
 
                     .title {
@@ -122,6 +154,7 @@ const displayData = (data) => {
                     }
 
                     .author {
+                        margin: 5px 0px;
                         span {
                             margin: 0px 5px;
                         }

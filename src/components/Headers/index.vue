@@ -13,11 +13,11 @@
         </div>
         <div v-show="props.show">
             <div class="lock">
-                <div class="lock-left" :disabled="props.isDisabled" @click="toggle('up')">
+                <div class="lock-left" @click="toggle('up')">
                     {{ props.leftTitle }}
                 </div>
                 <div class="lock-center" v-if="props.chapter">{{ props.chapter }}</div>
-                <div class="lock-right" :disabled="props.isDisabled" @click="toggle('next')">
+                <div class="lock-right" @click="toggle('next')">
                     {{ props.rightTitle }}
                 </div>
             </div>
@@ -40,10 +40,6 @@ const props = defineProps({
         default: "下一章",
     },
     chapter: String,
-    isDisabled: {
-        type: Boolean,
-        default: false,
-    },
 });
 const emit = defineEmits(["toggle"]);
 const toggle = (type) => emit("toggle", type);

@@ -1,14 +1,14 @@
 <!--
  * @Author: wbq
  * @Date: 2024-04-24 14:09:34
- * @LastEditTime: 2024-05-07 13:38:21
+ * @LastEditTime: 2024-05-08 10:01:52
  * @LastEditors: wbq
  * @Description: 文件功能描述
  * @FilePath: \BaiduSyncdisk\prod\jar.Wang\src\components\Books\index.vue
 -->
 <template>
     <div id="books" :style="switching">
-        <Headers :show="!!bookHtml.text" :left-title="isTxt('up')" :right-title="isTxt('next')" :chapter="chapter" :is-disabled="isTrue(bookHtml.up)" @toggle="toggle">
+        <Headers :show="!!bookHtml.text" :left-title="isTxt('up')" :right-title="isTxt('next')" :chapter="chapter" @toggle="toggle">
             <template #left>
                 <div class="books-txt">
                     <el-popover placement="bottom-start" width="300px" :popper-style="switching" popper-class="popover-books" title="设置" trigger="hover">
