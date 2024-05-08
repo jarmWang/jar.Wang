@@ -31,8 +31,8 @@ import { ref } from "vue";
 
 // 功能数组
 const uniqueFeature = ref([
-    { type: "Poetry", name: "诗词" },
     { type: "Music", name: "音乐" },
+    { type: "Poetry", name: "诗词" },
     { type: "Books", name: "书籍" },
     { type: "MessageBoard", name: "留言板" },
     { type: "关于", name: "关于" },
