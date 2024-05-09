@@ -1,16 +1,14 @@
 /*
  * @Author: wbq
  * @Date: 2024-03-12 15:19:45
- * @LastEditTime: 2024-05-09 11:06:58
+ * @LastEditTime: 2024-05-09 13:55:51
  * @LastEditors: wbq
  * @Description: 文件功能描述
  * @FilePath: \BaiduSyncdisk\prod\jar.Wang\vue.config.js
  */
 const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({
-    publicPath: process.env.NODE_ENV === 'production'
-        ? '/jar.Wang/'  // 这里填写你的 GitHub 仓库名称
-        : './',
+    publicPath: './',
     devServer: {
         port: 8888,
         open: false,
