@@ -1,7 +1,7 @@
 <!--
  * @Author: wbq
  * @Date: 2024-04-30 09:52:06
- * @LastEditTime: 2024-05-08 15:11:24
+ * @LastEditTime: 2024-05-09 11:08:53
  * @LastEditors: wbq
  * @Description: 文件功能描述
  * @FilePath: \BaiduSyncdisk\prod\jar.Wang\src\components\Poetry\index.vue
@@ -30,7 +30,7 @@
                             <div v-html="displayData(item.Clauses)" />
                         </div>
                     </div>
-                    <div class="isShow" v-show="displayData(item.Clauses).length > 2" @click="isShow(item, index)">
+                    <div class="isShow" v-show="(item.Clauses).length > 4" @click="isShow(item, index)">
                         {{ item.flag ? "收起" : "展开全文" }}
                     </div>
                 </div>
