@@ -7,7 +7,6 @@
  * @FilePath: \BaiduSyncdisk\prod\jar.Wang\src\components\Poetry\api\index.js
  */
 import { $ajax } from '@/api'
-const url = 'https://api.sou-yun.cn/open/poem'
 
 // 诗词搜索
 export function poetrySearch(data, options = {}) {
@@ -15,7 +14,7 @@ export function poetrySearch(data, options = {}) {
         .map(key => `${key}=${data[key]}`)
         .join('&')
     return $ajax({
-        url: url + '?' + v,
+        url: '/poetry?' + v,
         method: 'get',
         headers: {
             isLoading: true,
